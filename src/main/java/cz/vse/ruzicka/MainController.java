@@ -1,15 +1,35 @@
 package cz.vse.ruzicka;
 
+import cz.vse.ruzicka.logika.IHra;
+import cz.vse.ruzicka.logika.Prostor;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 
 public class MainController {
-    public Label labelA;
-    public Label labelB;
-    public Label labelC;
 
-    public void init() {
-        labelA.setText("Jiný text");
-        labelB.setCursor(Cursor.HAND);
+
+    private IHra hra;
+
+    public Label locationName;
+    public Label locationDescription;
+
+    public void init(IHra hra) {
+
+        this.hra = hra;
+        update();
     }
+
+    private void update() {
+       String location =  getAktualniProstor().getNazev();
+       locationName.setText(location);
+
+       String description = getAktualniProstor().getPopis();
+       locationDescription.setText(description);
+    }
+
+    private Prostor getAktualniProstor() {
+        return hra.getHerniPlan().getAktualniProstor();
+    }
+
+
 }
